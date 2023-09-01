@@ -11,7 +11,7 @@ app = dash.Dash(__name__)
 current_clicks = 0
 
 def update_fig():
-    my_places = pd.read_csv("data/places.csv", sep=";")
+    my_places = pd.read_csv("data.csv", sep=";")
     fig = px.scatter_mapbox(my_places, lat="lat", lon="lon", hover_name="Name",
                             color_discrete_sequence=["fuchsia"], zoom=3, height=1000)
     fig.update_layout(
@@ -50,10 +50,10 @@ app.layout = html.Div([
 def add_to_dataframe(n_clicks, field1, field2, field3):
     global current_clicks
     if n_clicks > current_clicks and field1 and field2 and field3:
-        my_places = pd.read_csv("data/places.csv", sep=";")
+        my_places = pd.read_csv("data.csv", sep=";")
         new_row = pd.DataFrame({'Name': [field1], 'lat': [field2], 'lon': [field3]})
         my_places = pd.concat([my_places, new_row], ignore_index=True)
-        my_places.to_csv("data/places.csv", sep=";", index=False)
+        my_places.to_csv("data.csv", sep=";", index=False)
         current_clicks = current_clicks + 1
         fig = update_fig()
         return f'Data added to DataFrame. Total rows: {len(my_places)}', fig  # Return the updated figure
