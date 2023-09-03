@@ -7,7 +7,7 @@ import plotly.express as px
 # Initialize the Dash app
 app = dash.Dash(__name__)
 
-# Create an empty DataFrame
+# click counter 
 current_clicks = 0
 
 def update_fig():
