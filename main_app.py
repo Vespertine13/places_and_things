@@ -18,7 +18,7 @@ current_clicks = 0
 def update_fig():
     my_places = pd.read_csv(config["data"]["path"], sep=";")
     fig = px.scatter_mapbox(my_places, lat="lat", lon="lon", hover_name="Name",
-                            color_discrete_sequence=["fuchsia"], zoom=3, height=1000)
+                            color_discrete_sequence=["yellow"], zoom=3, height=1000)
     fig.update_layout(
         mapbox_style="white-bg",
         mapbox_layers=[
@@ -32,6 +32,7 @@ def update_fig():
             }
         ])
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    fig.update_traces(marker=dict(size=10))
     return fig
 
 # Define the layout of the app
@@ -64,5 +65,6 @@ def add_to_dataframe(n_clicks, field1, field2, field3):
         return f'Data added to DataFrame. Total rows: {len(my_places)}', fig  # Return the updated figure
     return '', update_fig()  # Return an empty string and the current figure
 
+
 if __name__ == '__main__':
-    app.run_server(debug=True, port = 8844)
+    app.run_server(debug=True, port = 8845)
